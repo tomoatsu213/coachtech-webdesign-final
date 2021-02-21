@@ -1,0 +1,691 @@
+//マップ型変数breakpointsを定義
+$breakpoints: (
+  //キー  値
+  "ssm": "screen and (max-width: 540px)",
+  "sm": "screen and (max-width: 768px)",
+  //767px以下（スマホ）用の表示
+  "md": "screen and (min-width: 769px)",
+  "lg": "screen and (min-width: 1000px)",
+  "xl": "screen and (min-width: 1200px)"
+) !default;
+
+//メディアクエリ用のmixinを定義。デフォ値はmd
+@mixin mq($breakpoint: md) {
+  //map-get(マップ型変数, キー)で値を取得
+  @media #{map-get($breakpoints, $breakpoint)} {
+    //この中をカスタムできる
+    @content;
+  }
+}
+
+/*共通*/
+html {
+  font-size: 62.5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.7;
+}
+
+.flex {
+  display: flex;
+}
+
+.section-title {
+  font-size: 3rem;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+
+  a {
+    background-color: rgb(223, 37, 37);
+    color: white;
+    font-size: 1.6rem;
+    font-weight: bold;
+    display: block;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+/*----------------*/
+/*-----header-----*/
+/*---------------*/
+header {
+  z-index: 1;
+  background-color: rgb(255, 255, 255);
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  height: 70px;
+  width: 100%;
+
+  .header-left {
+    color: rgb(0, 0, 0);
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin: auto 0;
+  }
+}
+
+.nav-items {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: auto 0 auto auto;
+  padding: 0 0 0 50px;
+  font-size: 1.6rem;
+}
+
+.nav-item {
+  color: rgb(0, 0, 0);
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.top {
+  z-index: 0;
+  background-image: url("../img/mv.png");
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  color: white;
+  width: 100%;
+  height: 900px;
+  text-align: center;
+
+  @include mq(sm) {
+    height: 500px;
+  }
+
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 基準位置を左上から真ん中にする */
+    font-size: 5rem;
+    width: 90%;
+  }
+
+  p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 250%); /* 基準位置を左上から真ん中にする */
+    font-size: 1.8rem;
+    width: 90%;
+  }
+}
+
+.about {
+  background-color: black;
+  color: white;
+  padding: 80px;
+
+  h2 {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    line-height: 26px;
+  }
+}
+
+.service-items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 80px;
+
+  @include mq(sm) {
+    display: block;
+    margin: 0 7.5%;
+  }
+
+  .service-item {
+    width: 48%;
+    margin-bottom: 100px;
+
+    @include mq(sm) {
+      width: 100%;
+      margin: 0 auto 20px auto;
+    }
+
+    p {
+      padding: 0;
+
+      @include mq(sm) {
+        padding: 0;
+      }
+    }
+
+    p:nth-child(2) {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+
+    p:nth-child(3) {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.service {
+  padding-bottom: 80px;
+
+  button {
+    margin: 40px auto 0 auto;
+
+    a {
+      padding: 10px 50px;
+    }
+  }
+}
+
+.news {
+  background-color: rgb(31, 31, 31);
+  padding: 80px;
+
+  .news-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .btn-news {
+      font-size: 1.4rem;
+      margin: auto 0 auto auto;
+
+      a {
+        padding: 7px;
+      }
+    }
+  }
+
+  h2 {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+  }
+
+  .news-items {
+    width: 100%;
+    padding: 0;
+  }
+  .btn-topics {
+    width: 100%;
+    margin: 10px 0;
+
+    a {
+      color: black;
+      font-weight: normal;
+      display: block;
+      background-color: white;
+      text-align: left;
+      padding: 20px 5px;
+      margin: auto auto auto 0;
+
+      @include mq(sm) {
+        font-size: 1.4rem;
+        padding: 10px;
+      }
+
+      .news-topics {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.blog-items {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 80px;
+
+  @include mq(sm) {
+    display: block;
+    margin: 0 7.5%;
+  }
+
+  .blog-item {
+    width: 30%;
+
+    @include mq(sm) {
+      width: 100%;
+    }
+
+    p:nth-child(2) {
+      font-size: 1.4rem;
+    }
+
+    a:nth-child(3) {
+      font-size: 1.8rem;
+      color: black;
+      font-weight: bold;
+    }
+  }
+}
+
+.blog button {
+  margin: 80px auto;
+
+  @include mq(sm) {
+    margin: 40px auto 80px auto;
+  }
+
+  a {
+    padding: 10px 50px;
+  }
+}
+
+.info {
+  display: flex;
+  margin-bottom: 80px;
+
+  button {
+    width: 50%;
+
+    a {
+      font-size: 2.4rem;
+      padding: 120px 0;
+    }
+  }
+
+  .info-recruit {
+    background-color: black;
+  }
+}
+
+.contact {
+  background-color: aliceblue;
+  text-align: center;
+  padding: 80px 0;
+
+  .section-title {
+    padding: 0;
+  }
+
+  p {
+    font-size: 1.6rem;
+    padding: 5px 0 40px 0;
+  }
+
+  button a {
+    padding: 10px 70px;
+  }
+}
+
+footer {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 100px;
+
+  @include mq(sm) {
+    padding: 20px 170px;
+    height: 240px;
+    align-items: center;
+  }
+
+  @include mq(ssm) {
+    display: block;
+    padding: 20px 0px;
+  }
+
+  .copy-right {
+    font-size: 1.2rem;
+    margin: auto auto auto 0;
+    width: 60%;
+
+    @include mq(ssm) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .nav-items {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto 0 auto auto;
+    padding: 0;
+    font-size: 1.2rem;
+
+    @include mq(sm) {
+      display: block;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
+
+  .nav-item {
+    color: rgb(255, 255, 255);
+    padding: 0 0 0 10px;
+    font-weight: normal;
+
+    @include mq(sm) {
+      display: block;
+      padding: 4px 0 4px 0;
+    }
+  }
+
+  .nav-separate {
+    @include mq(sm) {
+      display: none;
+    }
+  }
+}
+
+// ヘッダースマホ用表示
+@media screen and (max-width: 768px) {
+  #hamburger {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 100;
+    top: 15px;
+    right: 20px;
+    transition: 0.4s;
+  }
+
+  #hamburger span {
+    position: absolute;
+    left: 2px;
+    display: block;
+    width: 35px;
+    height: 4px;
+    background-color: rgb(0, 0, 0);
+    transition: 0.8s;
+  }
+
+  #hamburger span:nth-of-type(1) {
+    top: 7px; /* ハンバーガーメニューの1本目の棒 */
+  }
+
+  #hamburger span:nth-of-type(2) {
+    top: 20px; /* ハンバーガーメニューの2本目の棒 */
+  }
+
+  #hamburger span:nth-of-type(3) {
+    top: 33px; /* ハンバーガーメニューの3本目の棒 */
+  }
+
+  .nav-items {
+    display: none; /* デスクトップのナビを消す */
+  }
+}
+
+//サブページ共通//
+.sub-top {
+  z-index: 0;
+  background-image: url("../img/mv.png");
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  color: white;
+  width: 100%;
+  height: 440px;
+  text-align: center;
+
+  @include mq(sm) {
+    height: 300px;
+  }
+
+  h1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* 基準位置を左上から真ん中にする */
+    font-size: 3rem;
+    width: 90%;
+  }
+}
+
+//事業内容//
+.sub-service {
+  margin: 80px 40px;
+
+  @include mq(sm) {
+    margin: 80px 10px;
+  }
+
+  .sub-service-items {
+    border-bottom: 1px black solid;
+
+    .sub-service-item {
+      display: flex;
+      padding: 20px 0;
+      border-top: 1px black solid;
+      border-collapse: collapse;
+
+      @include mq(sm) {
+        display: block;
+        margin: 0 7.5%;
+      }
+
+      img {
+        width: 30%;
+        height: 30%;
+
+        @include mq(sm) {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      h2 {
+        font-size: 2.4rem;
+        font-weight: bold;
+        padding-left: 20px;
+
+        @include mq(sm) {
+          padding-left: 0px;
+        }
+      }
+
+      p {
+        font-size: 1.6rem;
+        padding-left: 20px;
+
+        @include mq(sm) {
+          padding-left: 0px;
+        }
+      }
+    }
+  }
+}
+
+//ニュース//
+.sub-news {
+  margin: 80px;
+
+  @include mq(sm) {
+    margin: 80px 20px;
+  }
+
+  .sub-news-item {
+    font-size: 1.6rem;
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px black solid;
+    border-collapse: collapse;
+
+    @include mq(sm) {
+      padding: 15px;
+    }
+
+    .sub-news-topics {
+      font-weight: bold;
+    }
+  }
+}
+
+//社員ブログ//
+.sub-blog {
+  margin: 80px 10px 120px 10px;
+
+  @include mq(sm) {
+    margin: 80px 10px 60px 10px;
+  }
+
+  .sub-blog-items {
+    margin-bottom: 80px;
+
+    @include mq(sm) {
+      margin-bottom: 0px;
+    }
+
+    .sub-blog-item {
+      @include mq(sm) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+//会社概要//
+.company {
+  table {
+    width: 80%;
+    margin: 80px auto;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 20px 0;
+    width: 20%;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #000;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+  }
+
+  td {
+    padding: 20px 0 20px 50px;
+    font-size: 1.6rem;
+    border-top: 1px solid rgb(170, 126, 126);
+    border-bottom: 1px solid rgb(0, 0, 0);
+  }
+}
+
+//採用情報/
+.recruit {
+  margin: 80px;
+
+  h2 {
+    font-size: 2.6rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(0, 0, 0);
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.6rem;
+  }
+
+  table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+
+  th {
+    padding: 10px 0;
+    width: 20%;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #000;
+    background-color: aliceblue;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+  }
+
+  td {
+    padding: 10px 0 10px 10px;
+    font-size: 1.6rem;
+    border-top: 1px solid rgb(0, 0, 0);
+    border-bottom: 1px solid rgb(0, 0, 0);
+    border-right: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
+  }
+}
+
+//contact//
+form {
+  margin: 80px 80px;
+
+  .input-items {
+    width: 100%;
+
+    .input-item {
+      display: block;
+      text-align: left;
+      width: 100%;
+      margin: 10px 0px 20px 0px;
+
+      label {
+        font-size: 1.6rem;
+        font-weight: bold;
+
+        span{
+          color: rgb(211, 0, 0);
+        }
+      }
+
+      input[type="text"],
+      input[type="email"] {
+        display: block;
+        width: 100%;
+        border: 1px rgb(199, 199, 199) solid;
+        padding: 5px 0;
+      }
+
+      input[type="submit"] {
+        display: inline-block;
+        color: rgb(255, 255, 255);
+        background-color: #000;
+        font-size: 1.4rem;
+        font-weight: bold;
+        width: 250px;
+        height: 40px;
+        margin: 0 auto;
+        text-align: center;
+      }
+    }
+
+    .input-item-center {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .input-content{
+      height:140px;
+    }
+  }
+}
