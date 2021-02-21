@@ -10,7 +10,7 @@ $breakpoints: (
 ) !default;
 
 //メディアクエリ用のmixinを定義。デフォ値はmd
-@mixin mq($breakpoint: md) {
+@mixin mq($breakpoint: lg) {
   //map-get(マップ型変数, キー)で値を取得
   @media #{map-get($breakpoints, $breakpoint)} {
     //この中をカスタムできる
@@ -29,10 +29,6 @@ a {
 
 a:hover {
   opacity: 0.7;
-}
-
-.flex {
-  display: flex;
 }
 
 .section-title {
@@ -68,13 +64,14 @@ button {
 /*----------------*/
 /*-----header-----*/
 /*---------------*/
-header {
+.header {
   z-index: 1;
   background-color: rgb(255, 255, 255);
   position: sticky;
   top: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 30px;
   height: 70px;
   width: 100%;
@@ -87,10 +84,14 @@ header {
   }
 }
 
+.nav {
+  width: 100%;
+}
+
 .nav-items {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 660px;
   margin: auto 0 auto auto;
   padding: 0 0 0 50px;
   font-size: 1.6rem;
@@ -207,6 +208,10 @@ header {
 .news {
   background-color: rgb(31, 31, 31);
   padding: 80px;
+
+  @include mq(ssm) {
+    padding: 80px 20px;
+  }
 
   .news-top {
     display: flex;
@@ -344,6 +349,10 @@ footer {
   width: 100%;
   padding: 20px 100px;
 
+  @include mq(md) {
+    padding: 20px 50px;
+  }
+
   @include mq(sm) {
     padding: 20px 170px;
     height: 240px;
@@ -358,7 +367,7 @@ footer {
   .copy-right {
     font-size: 1.2rem;
     margin: auto auto auto 0;
-    width: 60%;
+    width: 120px;
 
     @include mq(ssm) {
       width: 100%;
@@ -385,10 +394,11 @@ footer {
     color: rgb(255, 255, 255);
     padding: 0 0 0 10px;
     font-weight: normal;
+    line-height: 2.5rem;
 
     @include mq(sm) {
       display: block;
-      padding: 4px 0 4px 0;
+      padding: 0 0 0 0;
     }
   }
 
@@ -401,41 +411,110 @@ footer {
 
 // ヘッダースマホ用表示
 @media screen and (max-width: 768px) {
-  #hamburger {
-    width: 40px;
-    height: 40px;
-    position: absolute;
-    cursor: pointer;
-    z-index: 100;
-    top: 15px;
-    right: 20px;
-    transition: 0.4s;
+  .header {
+    left: 0;
   }
 
-  #hamburger span {
-    position: absolute;
-    left: 2px;
-    display: block;
-    width: 35px;
-    height: 4px;
-    background-color: rgb(0, 0, 0);
-    transition: 0.8s;
-  }
-
-  #hamburger span:nth-of-type(1) {
-    top: 7px; /* ハンバーガーメニューの1本目の棒 */
-  }
-
-  #hamburger span:nth-of-type(2) {
-    top: 20px; /* ハンバーガーメニューの2本目の棒 */
-  }
-
-  #hamburger span:nth-of-type(3) {
-    top: 33px; /* ハンバーガーメニューの3本目の棒 */
+  .nav {
+    position: fixed;
+    left: -800px; /* これで隠れる */
+    top: 0;
+    width: 100%; /* スマホに収まるくらい */
+    height: 100%;
+    padding-top: 120px;
+    background-color: #fff;
+    transition: all 0.6s;
+    z-index: 200;
+    overflow-y: auto; /* メニューが多くなったらスクロールできるように */
   }
 
   .nav-items {
-    display: none; /* デスクトップのナビを消す */
+    display: block;
+    font-size: 1.8rem;
+    text-align: center;
+    line-height: 80px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-align: center;
+
+    a {
+      display: block;
+      text-decoration: none;
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+  }
+
+  .nav-item {
+    color: blue;
+    font-weight: normal;
+  }
+
+
+  .hamburger {
+    position: absolute;
+    right: 30px;
+    top: 0;
+    width: 40px; /* クリックしやすいようにちゃんと幅を指定する */
+    height: 40px; /* クリックしやすいようにちゃんと高さを指定する */
+    cursor: pointer;
+    z-index: 300;
+  }
+
+  .hamburger_line {
+    position: absolute;
+    left: 11px;
+    width: 38px;
+    height: 4px;
+    background-color: #111;
+    transition: all 0.6s;
+  }
+  .hamburger_line-1 {
+    top: 20px;
+  }
+  .hamburger_line-2 {
+    top: 35px;
+  }
+  .hamburger_line-3 {
+    top: 50px;
+  }
+  .white-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background-color: rgb(255, 255, 255);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s;
+    cursor: pointer;
+  }
+  /* 表示された時用のCSS */
+
+  .nav-open .nav {
+    left: 0;
+  }
+  .nav-open .white-bg {
+    opacity: 0.8;
+    visibility: visible;
+  }
+  .nav-open .hamburger_line-1 {
+    transform: rotate(45deg);
+    top: 35px;
+  }
+  .nav-open .hamburger_line-2 {
+    width: 0;
+    left: 50%;
+  }
+  .nav-open .hamburger_line-3 {
+    transform: rotate(-45deg);
+    top: 35px;
   }
 }
 
@@ -653,7 +732,7 @@ form {
         font-size: 1.6rem;
         font-weight: bold;
 
-        span{
+        span {
           color: rgb(211, 0, 0);
         }
       }
@@ -684,8 +763,8 @@ form {
       margin-top: 20px;
     }
 
-    .input-content{
-      height:140px;
+    .input-content {
+      height: 140px;
     }
   }
 }
