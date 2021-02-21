@@ -4,7 +4,7 @@ $breakpoints: (
   "ssm": "screen and (max-width: 540px)",
   "sm": "screen and (max-width: 768px)",
   //767px以下（スマホ）用の表示
-  "md": "screen and (min-width: 769px)",
+  "md": "screen and (max-width: 999px)",
   "lg": "screen and (min-width: 1000px)",
   "xl": "screen and (min-width: 1200px)"
 ) !default;
@@ -125,6 +125,7 @@ button {
     transform: translate(-50%, -50%); /* 基準位置を左上から真ん中にする */
     font-size: 5rem;
     width: 90%;
+    font-weight: bold;
   }
 
   p {
@@ -134,13 +135,14 @@ button {
     transform: translate(-50%, 250%); /* 基準位置を左上から真ん中にする */
     font-size: 1.8rem;
     width: 90%;
+    font-weight: bold;
   }
 }
 
 .about {
   background-color: black;
   color: white;
-  padding: 80px;
+  padding: 80px 40px;
 
   h2 {
     font-size: 3rem;
@@ -167,7 +169,7 @@ button {
 
   .service-item {
     width: 48%;
-    margin-bottom: 100px;
+    margin: 0 auto 20px auto;
 
     @include mq(sm) {
       width: 100%;
@@ -197,7 +199,7 @@ button {
   padding-bottom: 80px;
 
   button {
-    margin: 40px auto 0 auto;
+    margin: 20px auto 0 auto;
 
     a {
       padding: 10px 50px;
@@ -293,7 +295,7 @@ button {
 }
 
 .blog button {
-  margin: 80px auto;
+  margin: 40px auto 80px auto;
 
   @include mq(sm) {
     margin: 40px auto 80px auto;
@@ -541,6 +543,7 @@ footer {
     transform: translate(-50%, -50%); /* 基準位置を左上から真ん中にする */
     font-size: 3rem;
     width: 90%;
+    font-weight: bold;
   }
 }
 
@@ -625,14 +628,10 @@ footer {
 
 //社員ブログ//
 .sub-blog {
-  margin: 80px 10px 120px 10px;
-
-  @include mq(sm) {
-    margin: 80px 10px 60px 10px;
-  }
+  margin: 80px 10px 80px 10px;
 
   .sub-blog-items {
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 
     @include mq(sm) {
       margin-bottom: 0px;
@@ -667,14 +666,27 @@ footer {
   td {
     padding: 20px 0 20px 50px;
     font-size: 1.6rem;
-    border-top: 1px solid rgb(170, 126, 126);
+    border-top: 1px solid rgb(0, 0, 0);
     border-bottom: 1px solid rgb(0, 0, 0);
   }
 }
 
 //採用情報/
 .recruit {
-  margin: 80px;
+  margin: 80px 300px;
+
+  @include mq(md) {
+  margin: 80px 200px;
+  }
+
+  @include mq(sm) {
+  margin: 80px 100px;
+  }
+
+  @include mq(ssm) {
+    margin: 80px 10px;
+    }
+
 
   h2 {
     font-size: 2.6rem;
@@ -717,7 +729,19 @@ footer {
 
 //contact//
 form {
-  margin: 80px 80px;
+  margin: 80px 300px;
+
+  @include mq(md) {
+  margin: 80px 200px;
+  }
+
+  @include mq(sm) {
+  margin: 80px 100px;
+  }
+
+  @include mq(ssm) {
+    margin: 80px 10px;
+    }
 
   .input-items {
     width: 100%;
@@ -755,6 +779,7 @@ form {
         height: 40px;
         margin: 0 auto;
         text-align: center;
+        border:0;
       }
     }
 
